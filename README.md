@@ -23,8 +23,9 @@ Ideal for penetration testers and security researchers, the Tiny Web Shell Stage
 **Configuration**: Ensure DNS TXT records are set up with staged base64-encoded payload "remote.txt" with 250 length for each record, you need split the payload into multiple chunks. 
 ![image](https://github.com/lawrenceamer/ghostshell/assets/10256911/331f0f29-30cd-4b6f-9684-c68719b418e4)
 **Access**: Navigate to the web shell and provide the secret passphrase to unlock the advanced functionalities.
-
+![image](https://github.com/lawrenceamer/ghostshell/assets/10256911/ccc10edb-718b-4557-a7a4-089f313ff4a4)
 **Stealth**: When accessed without the correct passphrase, the tool will return a 404 HTTP response, blending in with standard error pages.
 By incorporating these features, the Tiny Web Shell Stager provides a robust and covert tool for secure remote access and command execution in web environments.
+![image](https://github.com/lawrenceamer/ghostshell/assets/10256911/22d13ba6-5d29-4a15-855b-6f91acc0781b)
 
-![image](https://github.com/lawrenceamer/ghostshell/assets/10256911/ccc10edb-718b-4557-a7a4-089f313ff4a4)
+
